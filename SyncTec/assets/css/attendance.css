@@ -1,0 +1,18 @@
+body{
+    background: #009970;
+    font-family: "Open Sans", sans-serif;
+}
+h2{
+    padding-left: 2rem;
+}
+.calendar {
+    border-collapse: collapse;
+    background: white;
+    border: 2px solid black;
+    border-radius: 1rem;
+}
+.calendar td {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}

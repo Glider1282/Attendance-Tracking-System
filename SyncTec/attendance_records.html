@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Records</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ddd1d16d;
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 100%;
+            padding: 0 20px;
+            margin: 0 auto;
+        }
+        .table-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #009970;
+            color: white;
+            border: 2px solid black;
+           
+        }
+        td {
+            border: 2px solid black;
+            border-radius: 0.4rem;
+        }
+        .bold {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">Attendance Records</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="font-size: larger;">Date</th>
+                        <th style="font-size: larger;">Time</th>
+                        <th style="font-size: larger;">Employee ID</th>
+                    </tr>
+                </thead>
+                <tbody id="attendance-table">
+                    <!-- Attendance records will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Fetch attendance records from the server
+        fetch('/attendance_records')
+          .then(response => response.json())
+          .then(attendanceRecords => {
+              const tableBody = document.getElementById('attendance-table');
+
+        // Populate table with attendance records
+             attendanceRecords.forEach(record => {
+               const row = document.createElement('tr');
+               row.innerHTML = `
+                <td>${record.date}</td>
+                <td>${record.time}</td>
+                <td><strong>${record.employee_id}</strong></td>
+               `;
+               tableBody.appendChild(row);
+                });
+              })
+          .catch(error => {
+              console.error('Error fetching attendance records:', error);
+          });
+
+    </script>    
+</body>
+</html>
